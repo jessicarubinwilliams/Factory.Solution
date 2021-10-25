@@ -59,11 +59,9 @@ This web-based application allows the fictitious factory manager of the fictitio
 * Scaffold the database with the command `$ dotnet ef database update`
 
 ### Run the project
-
 * Run the program in the console with the command `$ dotnet run`
 
 ## Known Bugs <a id="bugs"></a>
-
 * No known bugs.
 
 ## License <a id="license"></a>
