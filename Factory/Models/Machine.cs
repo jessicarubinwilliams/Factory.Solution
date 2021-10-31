@@ -10,6 +10,8 @@ namespace Factory.Models
       }
 
       public int MachineId { get; set; }
+
+      [DisplayName("Machine Name")]
       public string MachineName { get; set; }
       public virtual ICollection<EngineerMachine> EngineerMachineJoinEntity { get; set; }
     }

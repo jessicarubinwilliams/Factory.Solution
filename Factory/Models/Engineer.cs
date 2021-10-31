@@ -9,7 +9,11 @@ namespace Factory.Models
       this.EngineerMachineJoinEntity = new HashSet<EngineerMachine>();
     }
     public int EngineerId { get; set; }
+
+    [DisplayName("First Name")]
     public string EngineerFirstName { get; set; }
+
+    [DisplayName("Last Name")]
     public string EngineerLastName { get; set; }
     
     public virtual ICollection<EngineerMachine> EngineerMachineJoinEntity { get;}
