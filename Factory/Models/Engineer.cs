@@ -10,11 +10,8 @@ namespace Factory.Models
     }
     public int EngineerId { get; set; }
 
-    [DisplayName("First Name")]
-    public string EngineerFirstName { get; set; }
-
-    [DisplayName("Last Name")]
-    public string EngineerLastName { get; set; }
+    [DisplayName("Engineer Name `Last, First` ")]
+    public string EngineerName { get; set; }
     
     public virtual ICollection<EngineerMachine> EngineerMachineJoinEntity { get;}
   }
