@@ -30,8 +30,23 @@ namespace Factory.Controllers
     [HttpPost]
     public ActionResult Create(Machine machine)
     {
-      _db.Machines.Add(machine);
-      _db.SaveChanges();
+      ViewBag.ErrorMessage = "";
+      bool isUnique = true;
+      List<Machine> machineList = _db.Machines.ToList();
+      foreach(Machine iteration in machineList)
+      {
+        if (machine.MachineName == iteration.MachineName) 
+        {
+          isUnique = false;
+          ModelState.AddModelError("DuplicateName", iteration.MachineName + " already exists");
+          return View();
+        }
+      }
+      if (isUnique)
+      {
+        _db.Machines.Add(machine);
+        _db.SaveChanges();
+      }
       return RedirectToAction("Index");
     }
 
