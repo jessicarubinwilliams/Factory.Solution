@@ -6,7 +6,9 @@
 
 <h2>Add a licensed engineer</h2>
 
-<h4>Add a licensed engineer for this machine: @Html.DisplayFor(model => model.MachineName)</h4>
+<h4>Add a licensed engineer for @Html.DisplayFor(model => model.MachineName)</h4>
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
 @using (Html.BeginForm())
 {
