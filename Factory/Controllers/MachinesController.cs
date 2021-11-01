@@ -100,9 +100,27 @@ namespace Factory.Controllers
     {
       if (EngineerId != 0)
       {
-      _db.EngineerMachine.Add(new EngineerMachine() { EngineerId = EngineerId, MachineId = machine.MachineId });
+        ViewBag.ErrorMessage = "";
+        bool isUnique = true;
+        List<EngineerMachine> engineerMachineList = _db.EngineerMachine.ToList();
+        foreach(EngineerMachine iteration in engineerMachineList)
+        {
+          if (machine.MachineId == iteration.MachineId && EngineerId == iteration.EngineerId) 
+          {
+            isUnique = false;
+            Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == EngineerId);
+            ModelState.AddModelError("DuplicateEngineer", thisEngineer.EngineerName + " is already licensed to repair this machine.");
+            Machine thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == EngineerId);
+            ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "EngineerName");
+            return View(thisMachine);
+          }
+        }
+        if (isUnique)
+        {
+          _db.EngineerMachine.Add(new EngineerMachine() { EngineerId = EngineerId, MachineId = machine.MachineId });
+        }
+        _db.SaveChanges();
       }
-      _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
