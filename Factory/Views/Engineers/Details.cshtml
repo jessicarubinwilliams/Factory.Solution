@@ -4,9 +4,8 @@
 
 @model Factory.Models.Engineer
 
-<h2>Engineer Details</h2>
+<h2>Engineer Details: @Html.DisplayFor(model => model.EngineerName)</h2>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.EngineerName): @Html.DisplayFor(model => model.EngineerName)</h3>
 
 @if(@Model.EngineerMachineJoinEntity.Count == 0)
 {
