@@ -98,10 +98,10 @@ namespace Factory.Controllers
           {
             isUnique = false;
             Machine thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == MachineId);
-            ModelState.AddModelError("DuplicateMachine", engineer.EngineerName + " is already licensed to repair " + thisMachine.MachineName);
+            ModelState.AddModelError("DuplicateMachine", "This engineer is already licensed to repair " + thisMachine.MachineName);
             Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == MachineId);
             ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
-            return View();
+            return View(thisEngineer);
           }
         }
         if (isUnique)
