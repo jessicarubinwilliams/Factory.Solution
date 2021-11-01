@@ -23,12 +23,11 @@ namespace Factory.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Engineer engineer, int MachineId)
+    public ActionResult Create(Engineer engineer)
     {
       ViewBag.ErrorMessage = "";
       bool isUnique = true;
@@ -39,18 +38,12 @@ namespace Factory.Controllers
         {
           isUnique = false;
           ModelState.AddModelError("DuplicateName", iteration.EngineerName + " already exists");
-          ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
           return View();
         }
       }
       if (isUnique)
       {
         _db.Engineers.Add(engineer);
-        _db.SaveChanges();
-        if (MachineId != 0)
-        {
-          _db.EngineerMachine.Add(new EngineerMachine() { MachineId = MachineId, EngineerId = engineer.EngineerId });
-        }
         _db.SaveChanges();
       }
       return RedirectToAction("Index");
