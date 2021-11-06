@@ -3,6 +3,8 @@
 }
 
 @using Factory.Models;
+@using System.Collections.Generic;
+@using System.Linq;
 
 <h1>Welcome to Dr. SillyStringz's Factory Maintenance Management Application</h1>
 
@@ -12,26 +14,32 @@
 
 <hr />
 
-<h4>Dr. SillyStringz'z Engineers</h4>
+<h4>Dr. SillyStringz'z Machines</h4>
 
-@if (@ViewBag.EngineerList.Count == 0)
+@if (@Model.Keys.Count == 0)
+{
+  <h3>No machiness have been added yet!</h3>
+} 
+
+@foreach (List<Machine> key in @Model.Keys) {
+  List<Machine> MachineList = key.ToList();
+    @foreach (Machine machine in MachineList)
+    {
+      <li>@Html.ActionLink($"{machine.MachineName}", "Details", "Machines", new { id = machine.MachineId })</li>
+    }
+}
+
+<h4>Dr. Sillystringz's Engineers</h4>
+
+@if (@Model.Values.Count == 0)
 {
   <h3>No engineers have been added yet!</h3>
 } 
 
-@foreach (Engineer engineer in @ViewBag.EngineerList)
-{
-  <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", "Engineers", new { id = engineer.EngineerId })</li>
-}
-
-<h4>Dr. Sillystringz's Machines</h4>
-
-@if (@ViewBag.MachineList.Count == 0)
-{
-  <h3>No machines have been added yet!</h3>
-} 
-
-@foreach (Machine machine in @ViewBag.MachineList)
-{
-  <li>@Html.ActionLink($"{machine.MachineName}", "Details", "Machines", new { id = machine.MachineId })</li>
+@foreach (List<Engineer> value in @Model.Values) {
+  List<Engineer> EngineerList = value.ToList();
+    @foreach (Engineer engineer in EngineerList)
+    {
+      <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", "Engineers", new { id = engineer.EngineerId })</li>
+    }
 }
