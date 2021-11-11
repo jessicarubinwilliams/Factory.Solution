@@ -62,7 +62,7 @@ This web-based application allows the fictitious factory manager of the fictitio
 * Run the program in the console with the command `$ dotnet run`
 
 ## Known Bugs <a id="bugs"></a>
-* No known bugs.
+* * On the homepage, when there are no engineers or machines in the database, the conditional code in Factory/Views/Home/Index.cshtml that is supposed to display `No machines/engineers have been added yet!` does not work and instead nothing is displayed. I suspect it has to do with how I'm parsing the dictionary model. That's lines 17 & 32 of Factory/Views/Home/Index.cshtml. `@if (@Model.Keys.Count == 0)` and `@if (@Model.Values.Count == 0)`
 
 ## License <a id="license"></a>
 *[MIT](https://choosealicense.com/licenses/mit/)*
