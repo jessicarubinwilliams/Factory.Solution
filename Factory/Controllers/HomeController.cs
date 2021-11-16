@@ -18,10 +18,10 @@ namespace Factory.Controllers
     [HttpGet("/")]
     public ActionResult Index()
     {
-      List<object> MachineList = _db.Machines.ToList();
-      List<object> EngineerList = _db.Engineers.ToList();
+      List<Machine> MachineList = _db.Machines.ToList();
+      List<Engineer> EngineerList = _db.Engineers.ToList();
 
-      Dictionary<string, List<object>> modelList = new Dictionary<string, List<object>>() { {"Engineers", EngineerList} };
+      Dictionary<string, object> modelList = new Dictionary<string, object>() { {"Machines", MachineList}, {"Engineers", EngineerList} };
       
       return View(modelList);
     }
